@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>메가쇼 상담 유통사 매칭</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__inner">
+      <div>
+        <h1>상담 유통사 찾기</h1>
+        <p class="hero__copy">메가쇼 1:1 구매 및 수출 상담회 참가업체 대상 페이지입니다.</p>
+      </div>
+      <div class="hero__stats" aria-label="데이터 요약">
+        <div><strong id="statCompanies">-</strong><span>총 유통사</span></div>
+        <div><strong id="statMatched">-</strong><span>현재 결과</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <button type="button" id="filterToggle" class="mobileFilterToggle" aria-expanded="false" aria-controls="filterPanel">
+      <span id="filterToggleText">상품 조건 열기 ▼</span>
+      <span id="activeFilterCount" class="filterToggleBadge">조건 없음</span>
+    </button>
+
+    <aside id="filterPanel" class="filters is-collapsed" aria-label="상품 조건 필터">
+      <div class="filterHeader">
+        <div>
+          <h2>상품 조건 선택</h2>
+          <p>해당되는 항목만 체크하세요.</p>
+        </div>
+        <button type="button" id="resetBtn" class="linkButton">초기화</button>
+      </div>
+
+      <section class="filterBlock">
+        <h3>1. 대분류 카테고리</h3>
+        <div id="categoryOptions" class="checkboxGrid"></div>
+      </section>
+
+      <section class="filterBlock">
+        <h3>2. 상담 희망 품목</h3>
+        <p class="hint">대분류를 선택하면 해당 소분류가 나타납니다.</p>
+        <div id="itemOptions" class="itemGroups"></div>
+      </section>
+
+      <section class="filterBlock" id="storageBlock">
+        <h3>3. 보관방식</h3>
+        <p class="hint">식품 선택 시 상담 불가 조건과 비교합니다.</p>
+        <div id="storageOptions" class="checkboxGrid compact"></div>
+      </section>
+
+      <section class="filterBlock">
+        <h3>4. 특이사항</h3>
+        <p class="hint">내 상품에 해당되는 조건을 체크하면, 해당 조건을 상담 불가로 등록한 유통사는 제외됩니다.</p>
+        <div id="foodIssuePanel" class="issuePanel hidden">
+          <div class="issueTitle">식품 특이사항</div>
+          <div id="foodIssueOptions" class="checkboxList"></div>
+        </div>
+        <div class="issuePanel">
+          <div class="issueTitle">공통 특이사항</div>
+          <div id="commonIssueOptions" class="checkboxList"></div>
+        </div>
+      </section>
+
+      <section class="filterBlock optional">
+        <h3>추가 필터</h3>
+        <label class="fieldLabel" for="keywordInput">유통사명 / 채널 / 사업분야 검색</label>
+        <input id="keywordInput" class="searchInput" type="search" placeholder="예: 홈쇼핑, 수출, GS" />
+        <div class="minorTitle">상담 방향</div>
+        <div id="typeOptions" class="checkboxGrid compact"></div>
+      </section>
+
+      <button type="button" id="mobileApplyBtn" class="mobileApplyButton">선택 조건으로 결과 보기</button>
+    </aside>
+
+    <main class="resultsArea">
+      <div class="mobileResultBar" aria-live="polite">
+        <span>총 유통사 <strong id="mobileStatCompanies">-</strong>곳</span>
+        <span>현재 결과 <strong id="mobileStatMatched">-</strong>곳</span>
+      </div>
+      <div class="toolbar">
+        <div>
+          <p id="conditionSummary" class="conditionSummary">전체 유통사를 표시 중입니다.</p>
+          <h2 id="resultTitle">상담 가능 유통사</h2>
+        </div>
+        <label class="sortLabel">정렬
+          <select id="sortSelect">
+            <option value="score">추천순</option>
+            <option value="company">유통사명순</option>
+          </select>
+        </label>
+      </div>
+      <div id="results" class="results"></div>
+      <template id="emptyTemplate">
+        <div class="emptyState">
+          <h3>조건에 맞는 유통사가 없습니다.</h3>
+          <p>소분류 또는 특이사항 체크를 줄여보거나, 보관방식을 다시 확인하세요.</p>
+        </div>
+      </template>
+    </main>
+  </div>
+
+  <button type="button" id="backToTopBtn" class="backToTopBtn" aria-label="맨 위로 가기" title="맨 위로 가기">▲</button>
+
+  <script src="data/distributors.js"></script>
+  <script src="data/brochures.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
